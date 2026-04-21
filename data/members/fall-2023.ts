@@ -3,6 +3,7 @@ export type Member = {
   part: "Soprano" | "Alto" | "Tenor" | "Bass" | "Beatbox" | "Marketing";
   school: string;
   major: string;
+  current?: boolean;
   funFact?: string;
   photo?: string;
 };

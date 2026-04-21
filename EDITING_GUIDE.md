@@ -301,10 +301,13 @@ Open the relevant file, e.g., `data/members/fall-2023.ts`, and add or modify ent
   part: "Soprano",           // Soprano | Alto | Tenor | Bass | Beatbox | Marketing
   school: "College of Arts & Sciences",
   major: "Computer Science",
+  current: true,             // true = Current Member, false/omitted = Alumni
   funFact: "Can solve a Rubik's cube in under a minute.",
   photo: "/media/members/fall-2023/jane-doe.jpg",   // optional
 },
 ```
+
+The `current` field controls which section the member appears under on the page. Members with `current: true` are shown under **Current Members**; everyone else appears under **Alumni**. If you omit `current`, the member defaults to Alumni.
 
 ### Add a new semester
 
