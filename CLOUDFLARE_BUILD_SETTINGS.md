@@ -2,38 +2,28 @@
 
 Configure these in the Cloudflare dashboard under **Workers & Pages → pennenchord-website → Settings → Build**.
 
-## Current working setup
+## Correct settings
 
 | Setting | Value |
 |---------|-------|
 | **Framework preset** | None |
-| **Build command** | `npm run build` |
-| **Deploy command** | `npx wrangler deploy` |
+| **Build command** | `npm run deploy` |
+| **Deploy command** | *(leave blank)* |
 | **Build output directory** | *(leave blank)* |
 | **Root directory** | *(leave blank — repo root)* |
 | **Node.js version** | 22.x |
 
-> `npx wrangler deploy` detects `open-next.config.ts` and automatically calls `opennextjs-cloudflare build && opennextjs-cloudflare deploy`. This means Next.js is built twice per deploy (once by `npm run build`, once by OpenNext). It works correctly but is slightly slower.
+`npm run deploy` (defined in `package.json`) runs:
+```
+opennextjs-cloudflare build && opennextjs-cloudflare deploy
+```
 
-## Optimized setup (avoids the double build)
+This compiles the Next.js app into a Cloudflare Worker bundle and deploys it in one step. The deploy command must be left blank — running build and deploy separately causes a "Could not find compiled Open Next config" error because the deploy step would run before the build artifacts exist.
 
-| Setting | Value |
-|---------|-------|
-| **Framework preset** | None |
-| **Build command** | *(leave blank)* |
-| **Deploy command** | `npm run deploy` |
-| **Build output directory** | *(leave blank)* |
-| **Root directory** | *(leave blank — repo root)* |
-| **Node.js version** | 22.x |
-
-`npm run deploy` is defined in `package.json` as `opennextjs-cloudflare build && opennextjs-cloudflare deploy`, which builds and deploys in one step.
-
-## Required files (already committed)
-
-These files must be present in the repo for the build to work. Do not delete them.
+## Required files (already committed — do not delete)
 
 | File | Purpose |
 |------|---------|
-| `wrangler.jsonc` | Cloudflare Worker configuration — sets the worker name to `pennenchord-website` |
-| `open-next.config.ts` | Tells wrangler this is an OpenNext project |
+| `wrangler.jsonc` | Cloudflare Worker config — worker name must be `pennenchord-website` |
+| `open-next.config.ts` | OpenNext adapter config |
 | `next.config.ts` | Must have `output: "standalone"` (not `"export"`) |
