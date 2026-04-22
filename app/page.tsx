@@ -30,7 +30,7 @@ export default function Home() {
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-4 text-white">About Us</h2>
           <p className="text-gray-400 leading-relaxed">
-          宾大安可阿卡贝拉清唱团（EnChord A Cappella at Penn）成立于 2013 年，由来自宾大多个学院和年级的大陆留学生共同创立。
+          宾大安可阿卡贝拉清唱团（EnChord A Cappella at Penn）成立于 2013 年，由来自费城各个学校多个学院和年级的大陆留学生共同创立。
           <br />
           我们热爱音乐，无论是古典、流行还是 Rap，并用纯人声的方式演绎多元风格的中英文歌曲。
           <br />
