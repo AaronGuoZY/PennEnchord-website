@@ -14,12 +14,12 @@ export default function ConcertsPage() {
             href={`/concerts/${concert.slug}`}
             className="group border border-gray-800 rounded-xl overflow-hidden bg-gray-900 hover:border-gray-600 transition-colors"
           >
-            <div className="bg-gray-800 h-48 flex items-center justify-center text-gray-600 text-sm">
+            <div className="bg-gray-800 aspect-[2/3] flex items-center justify-center text-gray-600 text-sm overflow-hidden">
               {concert.coverImage ? (
                 <img
                   src={concert.coverImage}
                   alt={concert.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
               ) : (
                 "No photo yet"

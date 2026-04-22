@@ -1,33 +1,13 @@
 import Link from "next/link";
 import { concerts } from "@/data/concerts";
+import HeroSection from "@/components/HeroSection";
 
 export default function Home() {
   const upcoming = concerts[0];
 
   return (
     <div>
-      {/* Hero */}
-      <section className="bg-black text-white py-24 px-4 text-center">
-        <h1 className="text-5xl font-bold tracking-tight mb-4">PennEnchord</h1>
-        <p className="text-lg text-gray-400 max-w-xl mx-auto mb-8">
-          An a cappella group at the University of Pennsylvania, founded in 2013.
-          We sing in Chinese and English across genres — and we love what we do.
-        </p>
-        <div className="flex gap-4 justify-center flex-wrap">
-          <Link
-            href="/tickets"
-            className="bg-white text-gray-900 font-semibold px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors"
-          >
-            Get Tickets
-          </Link>
-          <Link
-            href="/concerts"
-            className="border border-gray-600 text-gray-300 font-semibold px-6 py-3 rounded-lg hover:border-white hover:text-white transition-colors"
-          >
-            Past Concerts
-          </Link>
-        </div>
-      </section>
+      <HeroSection />
 
       {/* Stats */}
       <section className="py-14 px-4 bg-gray-950">
@@ -50,10 +30,15 @@ export default function Home() {
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-4 text-white">About Us</h2>
           <p className="text-gray-400 leading-relaxed">
-            PennEnchord was founded in 2013 by mainland Chinese international students from various
-            schools at Penn. We perform original arrangements and compositions across multiple genres
-            and languages, hosting two concerts each semester. Beyond performing, we participate in
-            charity events, senior center visits, and cultural celebrations across Philadelphia.
+          宾大安可阿卡贝拉清唱团（EnChord A Cappella at Penn）成立于 2013 年，由来自宾大多个学院和年级的大陆留学生共同创立。
+          <br />
+          我们热爱音乐，无论是古典、流行还是 Rap，并用纯人声的方式演绎多元风格的中英文歌曲。
+          <br />
+          十年间，安可编曲团队改编与创作 180 余首作品，其中原创编曲近 100 首，包括《冰雪奇缘组曲》、《红玫瑰》、《周杰伦串烧》、《童年回忆杀》等经典曲目。
+          <br />
+          历年来演唱会售票累计 4500 张，观众遍及校园内外。
+          <br />
+          安可大家庭已有 100 余位成员，他们在世界各地继续传递属于 EnChord 的音乐与友情。
           </p>
         </div>
       </section>
