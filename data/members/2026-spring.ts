@@ -165,8 +165,8 @@ export const spring2026Members: Spring2026Member[] = [
     part: "Alto / Mezzo",
     role: "前social chair+见习编曲",
     whatsongyouwerelisteningtenyearsago: "邓紫棋邓紫棋邓紫棋",
-    messageToAudience: "我要你 慢慢喜欢我们",
-    messageToMembers: "我是落叶🍂安可是根",
+    messageToAudience: "每一首歌从编曲到排练，\n每一个舞台从设计到技术支持，\n背后都凝聚着无数人的心血。\nHope you all enjoy the performance!",
+    messageToMembers: "感谢所有幕后工作者的辛勤付出，\n希望所有人都可以开开心心的享受每分每秒，一直一直唱下去！",
     photo: "/media/members/2026-spring/Freya.jpg",
   },
   {
