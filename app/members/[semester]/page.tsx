@@ -1,56 +1,62 @@
-import { fall2023Members } from "@/data/members/fall-2023";
-import { spring2023Members } from "@/data/members/spring-2023";
+import { spring2026Members } from "@/data/members/2026-spring";
 import { notFound } from "next/navigation";
-import Link from "next/link";
-import type { Member } from "@/data/members/fall-2023";
+import type { Spring2026Member } from "@/data/members/2026-spring";
 
-const semesterData: Record<string, { label: string; members: Member[] }> = {
-  "fall-2023": { label: "Fall 2023 — By the Fireplace", members: fall2023Members },
-  "spring-2023": { label: "Spring 2023 — Wild Bloom", members: spring2023Members },
+const semesterData: Record<string, { label: string; members: Spring2026Member[] }> = {
+  "spring-2026": { label: "Spring 2026", members: spring2026Members },
 };
 
 const semesters = Object.keys(semesterData);
 
-const partOrder = ["Soprano", "Alto", "Tenor", "Bass", "Beatbox", "Marketing"];
+const partOrder = ["Soprano", "Alto", "Tenor", "Bass", "Beatbox", "Music Director & 编曲", "Marketing", "Tech", ""];
 
-function groupByPart(members: Member[]) {
-  return partOrder.reduce((acc, part) => {
-    const group = members.filter((m) => m.part === part);
-    if (group.length > 0) acc[part] = group;
+function groupByCategory(members: Spring2026Member[]) {
+  return partOrder.reduce((acc, category) => {
+    const group = members.filter((m) => m.category === category);
+    if (group.length > 0) acc[category] = group;
     return acc;
-  }, {} as Record<string, Member[]>);
+  }, {} as Record<string, Spring2026Member[]>);
 }
 
-function MemberCard({ member }: { member: Member }) {
+function MemberCard({ member }: { member: Spring2026Member }) {
   return (
-    <div className="border border-gray-800 rounded-xl p-4 text-center bg-gray-900">
-      <div className="w-20 h-20 rounded-full bg-gray-800 mx-auto mb-3 overflow-hidden flex items-center justify-center text-gray-600 text-xs">
+    <div className="border border-gray-800 rounded-xl overflow-hidden bg-gray-900 flex flex-col">
+      <div className="w-full aspect-[2/3] overflow-hidden bg-gray-800">
         {member.photo ? (
-          <img src={member.photo} alt={member.name} className="w-full h-full object-cover" />
+          <img src={member.photo} alt={member.name} className="w-full h-full object-cover object-center" />
         ) : (
-          "Photo"
+          <div className="w-full h-full flex items-center justify-center text-gray-600 text-xs">Photo</div>
         )}
       </div>
-      <p className="font-semibold text-sm text-white">{member.name}</p>
-      <p className="text-xs text-gray-500 mt-0.5">{member.major}</p>
-      {member.funFact && (
-        <p className="text-xs text-gray-600 mt-2 italic">"{member.funFact}"</p>
-      )}
+      <div className="p-4 flex flex-col gap-1.5">
+        <p className="font-semibold text-white">{member.name}</p>
+        {member.school && <p className="text-xs text-gray-400">学校: {member.school}</p>}
+        {member.major && <p className="text-xs text-gray-400">专业: {member.major}</p>}
+        {member.role && <p className="text-xs text-gray-400">团内职务: {member.role}</p>}
+        {member.whatsongyouwerelisteningtenyearsago && (
+          <p className="text-xs text-gray-400">十年前的自己在听什么歌: {member.whatsongyouwerelisteningtenyearsago}</p>
+        )}
+        {member.messageToAudience && (
+          <p className="text-xs text-gray-400">想对观众说些什么: {member.messageToAudience}</p>
+        )}
+        {member.messageToMembers && (
+          <p className="text-xs text-gray-400 whitespace-pre-line">想对安可说些什么: {member.messageToMembers}</p>
+        )}
+      </div>
     </div>
   );
 }
 
-function MemberGrid({ members, label }: { members: Member[]; label: string }) {
-  const grouped = groupByPart(members);
+function MemberGrid({ members }: { members: Spring2026Member[] }) {
+  const grouped = groupByCategory(members);
   if (members.length === 0) return null;
 
   return (
     <div className="mb-16">
-      <h2 className="text-2xl font-bold mb-8 text-white">{label}</h2>
-      {Object.entries(grouped).map(([part, group]) => (
-        <section key={part} className="mb-12">
-          <h3 className="text-xl font-bold mb-5 border-b border-gray-800 pb-2 text-white">{part}</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
+      {Object.entries(grouped).map(([category, group]) => (
+        <section key={category} className="mb-12">
+          <h3 className="text-xl font-bold mb-5 border-b border-gray-800 pb-2 text-white">{category}</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
             {group.map((member) => (
               <MemberCard key={member.name} member={member} />
             ))}
@@ -74,33 +80,11 @@ export default async function MembersPage({
   const data = semesterData[semester];
   if (!data) notFound();
 
-  const currentMembers = data.members.filter((m) => m.current === true);
-  const alumni = data.members.filter((m) => !m.current);
-
   return (
     <div className="max-w-6xl mx-auto px-4 py-16">
-      {/* Semester selector */}
-      <div className="flex gap-3 mb-10 flex-wrap">
-        {semesters.map((s) => (
-          <Link
-            key={s}
-            href={`/members/${s}`}
-            className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
-              s === semester
-                ? "bg-white text-gray-900 border-white"
-                : "border-gray-700 text-gray-400 hover:border-gray-400 hover:text-gray-200"
-            }`}
-          >
-            {semesterData[s].label.split("—")[0].trim()}
-          </Link>
-        ))}
-      </div>
-
       <h1 className="text-4xl font-bold mb-2 text-white">Members</h1>
       <p className="text-gray-500 mb-10">{data.label}</p>
-
-      <MemberGrid members={currentMembers} label="Current Members" />
-      <MemberGrid members={alumni} label="Alumni" />
+      <MemberGrid members={data.members} />
     </div>
   );
 }
