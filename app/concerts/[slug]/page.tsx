@@ -32,12 +32,14 @@ export default async function ConcertPage({
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-2xl font-bold text-white">Concert Booklet</h2>
           </div>
-          <iframe
-            src={concert.booklet}
-            title="Concert Booklet"
-            className="w-full rounded-lg"
-            style={{ height: "80vh", border: "none" }}
-          />
+          <div className="w-full rounded-lg overflow-y-scroll" style={{ height: "80vh", WebkitOverflowScrolling: "touch" }}>
+            <iframe
+              src={concert.booklet}
+              title="Concert Booklet"
+              className="w-full h-full"
+              style={{ border: "none" }}
+            />
+          </div>
         </section>
       )}
 
