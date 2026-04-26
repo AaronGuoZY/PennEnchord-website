@@ -25,13 +25,13 @@ function PlatformCard({ name, href, active, logo, logoLabel, accentClass }: Plat
 
   const content = (
     <div
-      className={`flex flex-col items-center gap-6 w-56 py-10 px-6 rounded-2xl border-2 transition-all
+      className={`flex flex-col items-center justify-center gap-4 w-56 h-56 px-6 rounded-2xl border-2 transition-all
         ${hasLink
           ? `${accentClass} cursor-pointer`
           : "border-gray-800 bg-gray-900 opacity-40 cursor-not-allowed"
         }`}
     >
-      <div className="flex items-center justify-center">{logo}</div>
+      <div className="flex items-center justify-center h-16">{logo}</div>
       <div className="flex flex-col items-center gap-1">
         {logoLabel}
         {hasLink && (
@@ -116,7 +116,7 @@ export default function LivePage() {
           active={active}
           accentClass="border-blue-400 bg-blue-950 hover:bg-blue-900"
           logo={
-            <img src="/logo/Bilibili_2020.svg" alt="Bilibili" className="w-32 h-auto" />
+            <img src="/logo/Bilibili_2020.svg" alt="Bilibili" className="w-24 h-auto" />
           }
           logoLabel={
             <span className="font-semibold text-gray-200 text-sm">Bilibili</span>
