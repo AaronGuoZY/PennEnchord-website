@@ -31,13 +31,6 @@ export default async function ConcertPage({
         <section className="mb-12">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-2xl font-bold text-white">Concert Booklet</h2>
-            <a
-              href={concert.booklet}
-              download
-              className="text-sm text-gray-400 hover:text-white transition-colors underline underline-offset-2"
-            >
-              Download PDF
-            </a>
           </div>
           <iframe
             src={concert.booklet}
