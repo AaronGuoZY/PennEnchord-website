@@ -5,6 +5,7 @@ export type Concert = {
   date: string;
   description: string;
   coverImage: string;
+  booklet?: string;
   youtubeVideos: { title: string; url: string }[];
   photos: string[];
 };
@@ -17,6 +18,7 @@ export const concerts: Concert[] = [
     date: "April 26, 2026",
     description: "A collection of letters from the past, present, and future.",
     coverImage: "/media/concerts/2026-spring/poster/pennenchord_26spring_poster.jpg",
+    booklet: "/media/concerts/2026-spring/booklet/PennEnchord2026SpringConcertProgram.pdf",
     youtubeVideos: [],
     photos: [],
   },

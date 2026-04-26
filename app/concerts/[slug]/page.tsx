@@ -26,6 +26,28 @@ export default async function ConcertPage({
       {concert.date && <p className="text-gray-400 mb-4">{concert.date}</p>}
       {concert.description && <p className="text-gray-400 mb-10">{concert.description}</p>}
 
+      {/* Concert Booklet */}
+      {concert.booklet && (
+        <section className="mb-12">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-2xl font-bold text-white">Concert Booklet</h2>
+            <a
+              href={concert.booklet}
+              download
+              className="text-sm text-gray-400 hover:text-white transition-colors underline underline-offset-2"
+            >
+              Download PDF
+            </a>
+          </div>
+          <iframe
+            src={concert.booklet}
+            title="Concert Booklet"
+            className="w-full rounded-lg border border-gray-700"
+            style={{ height: "80vh" }}
+          />
+        </section>
+      )}
+
       {/* YouTube Videos */}
       {concert.youtubeVideos.length > 0 && (
         <section className="mb-12">
