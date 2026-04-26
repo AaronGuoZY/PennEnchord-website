@@ -1,20 +1,15 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { liveStream } from "@/data/live";
 
-function YouTubeLogo({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 90 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* YouTube wordmark: icon + text */}
-      {/* Icon: red rounded rect + white play triangle */}
-      <rect x="0" y="0" width="28" height="20" rx="4" fill="#FF0000" />
-      <polygon points="11,5 11,15 21,10" fill="white" />
-      {/* "YouTube" text */}
-      <text x="32" y="15" fontFamily="Arial, sans-serif" fontWeight="bold" fontSize="13" fill="currentColor">
-        YouTube
-      </text>
-    </svg>
-  );
-}
+const scheduleStart = new Date(liveStream.schedule.start);
+const scheduleEnd = new Date(liveStream.schedule.end);
 
+function isLiveNow() {
+  const now = new Date();
+  return now >= scheduleStart && now <= scheduleEnd;
+}
 
 type PlatformCardProps = {
   name: string;
@@ -67,9 +62,17 @@ function PlatformCard({ name, href, active, logo, logoLabel, accentClass }: Plat
 }
 
 export default function LivePage() {
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    setActive(isLiveNow());
+    const interval = setInterval(() => setActive(isLiveNow()), 30_000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center px-4 text-center">
-      {liveStream.active ? (
+      {active ? (
         <div className="inline-flex items-center gap-2 bg-red-100 text-red-600 text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
           <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
           LIVE NOW
@@ -77,10 +80,10 @@ export default function LivePage() {
       ) : null}
 
       <h1 className="text-4xl font-bold mb-2">
-        {liveStream.active ? liveStream.concertName : "Live Stream"}
+        {active ? liveStream.concertName : "Live Stream"}
       </h1>
       <p className="text-gray-500 mb-10 max-w-md">
-        {liveStream.active
+        {active
           ? "Choose your platform to watch the live stream."
           : "No live stream is currently active. Check back during our next concert!"}
       </p>
@@ -90,7 +93,7 @@ export default function LivePage() {
         <PlatformCard
           name="YouTube"
           href={liveStream.youtube}
-          active={liveStream.active}
+          active={active}
           accentClass="border-red-500 bg-red-950 hover:bg-red-900"
           logo={
             <svg viewBox="0 0 102 72" className="w-24 h-auto" xmlns="http://www.w3.org/2000/svg">
@@ -110,7 +113,7 @@ export default function LivePage() {
         <PlatformCard
           name="Bilibili"
           href={liveStream.bilibili}
-          active={liveStream.active}
+          active={active}
           accentClass="border-blue-400 bg-blue-950 hover:bg-blue-900"
           logo={
             <img src="/logo/Bilibili_2020.svg" alt="Bilibili" className="w-32 h-auto" />
@@ -121,7 +124,7 @@ export default function LivePage() {
         />
       </div>
 
-      {!liveStream.active && (
+      {!active && (
         <p className="text-xs text-gray-400 mt-10">
           Follow us on Instagram{" "}
           <a href="https://www.instagram.com/pennenchord" className="underline hover:text-gray-600">
