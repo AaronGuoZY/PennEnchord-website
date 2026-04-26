@@ -42,8 +42,8 @@ export default async function ConcertPage({
           <iframe
             src={concert.booklet}
             title="Concert Booklet"
-            className="w-full rounded-lg border border-gray-700"
-            style={{ height: "80vh" }}
+            className="w-full rounded-lg"
+            style={{ height: "80vh", border: "none" }}
           />
         </section>
       )}
