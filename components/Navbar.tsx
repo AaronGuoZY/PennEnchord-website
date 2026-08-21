@@ -31,7 +31,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop */}
-        <div className="hidden md:flex gap-6 text-sm font-medium">
+        <div className="hidden md:flex gap-6 text-xl font-medium">
           {links.map((l) => (
             <Link
               key={l.href}
