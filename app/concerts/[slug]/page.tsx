@@ -1,6 +1,7 @@
 import { concerts } from "@/data/concerts";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import BookletViewer from "@/components/BookletViewer";
 
 export function generateStaticParams() {
   return concerts.map((c) => ({ slug: c.slug }));
@@ -32,14 +33,7 @@ export default async function ConcertPage({
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-2xl font-bold text-white">Concert Booklet</h2>
           </div>
-          <div className="w-full rounded-lg overflow-y-scroll" style={{ height: "80vh", WebkitOverflowScrolling: "touch" }}>
-            <iframe
-              src={concert.booklet}
-              title="Concert Booklet"
-              className="w-full h-full"
-              style={{ border: "none" }}
-            />
-          </div>
+          <BookletViewer bookletUrl={concert.booklet} />
         </section>
       )}
 

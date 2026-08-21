@@ -48,7 +48,7 @@ export default function HeroSection() {
   return (
     <div ref={wrapperRef} className="relative bg-black text-white">
       {/* Sticky photo + overlay */}
-      <div className="sticky top-0">
+      <div className="sticky top-0 pointer-events-none">
         <img
           ref={imgRef}
           src="/media/home/current-group-photo/DSC02890.JPG"
